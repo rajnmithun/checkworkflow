@@ -1,0 +1,24 @@
+name: Create PR from Stage to Main
+
+on:
+  push:
+    branches:
+      - stage
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Create Pull Request to master
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          title: 'Merge stage into main'
+          body: |
+            Automated PR created to merge changes from stage to master.
+          labels: 'auto-generated'
