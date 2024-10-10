@@ -14,15 +14,25 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run test
-        run: echo 'testing ....'
+        run: |
+          echo 'testing ....'
+          sleep 600
 
-      - name: Create Pull Request to master
+      - name: Create Pull Request to main
+        id: cpr
         if: success()
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
-          title: 'Merge stage into main'
+          title: Merge stage into main
           body: |
             Automated PR created to merge changes from stage to master.
-          labels: 'auto-generated'
+          labels: auto-generated
+          draft: true
+
+      - name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
