@@ -16,7 +16,7 @@ jobs:
       - name: Run test
         run: |
           echo 'testing ....'
-          sleep 600
+          sleep 60
 
       - name: Create Pull Request to main
         id: cpr
