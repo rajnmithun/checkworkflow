@@ -17,6 +17,8 @@ jobs:
         run: |
           echo 'testing ....'
           sleep 60
+          echo 'fail intentionally'
+          exit 1
 
       - name: Create Pull Request to main
         id: cpr
