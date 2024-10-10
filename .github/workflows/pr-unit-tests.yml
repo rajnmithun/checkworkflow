@@ -16,4 +16,4 @@ jobs:
       - name: Run unit test
         run: |
           echo 'unit testing ....'
-          sleep 600
+          sleep 60
