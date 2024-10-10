@@ -13,7 +13,11 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v3
 
+      - name: Run test
+        run: echo 'testing ....'
+
       - name: Create Pull Request to master
+        if: success()
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
