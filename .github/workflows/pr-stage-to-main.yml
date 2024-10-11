@@ -18,17 +18,20 @@ jobs:
           echo 'testing ....'
           sleep 60
 
+      - name: Reset promotion branch
+        run: |
+          git fetch origin stage:stage
+          git reset --hard stage
+
       - name: Create Pull Request to main
         id: cpr
-        if: success()
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
           title: Merge stage into main
           body: |
             Automated PR created to merge changes from stage to master.
           labels: auto-generated
+          branch: main
           draft: true
 
       - name: Check outputs
