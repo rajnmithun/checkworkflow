@@ -33,7 +33,7 @@ jobs:
           body: |
             Automated PR created to merge changes from stage to master.
           labels: auto-generated
-          branch: main
+          branch: main-promotion
           draft: true
 
       - name: Check outputs
